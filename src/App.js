@@ -1,25 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from "react-redux";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  //store에 접근해 counter의 값을 읽어오기
+  //useSelector hook 이용
+  const data = useSelector((state) => {
+    return state;
+  });
+
+  console.log(data);
+
+  return <div className="App"></div>;
 }
 
 export default App;
