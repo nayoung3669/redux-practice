@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { INCREASE, DECREASE } from "./redux/modules/counter";
+import { decrease, increase } from "./redux/modules/counter";
 
 function App() {
   //store에 접근해 counter의 값을 읽어오기
@@ -14,8 +14,8 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => dispatch({ type: INCREASE })}>z+</button>
-      <button onClick={() => dispatch({ type: DECREASE })}>-</button>
+      <button onClick={() => dispatch(increase())}>+</button>
+      <button onClick={() => dispatch(decrease())}>-</button>
       현재 카운트: {data.counter.number}
     </div>
   );
