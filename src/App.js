@@ -1,7 +1,5 @@
-import "./App.css";
-
 function App() {
-  return <div className="App"></div>;
+  return <div style={{ display: "flex", justifyContent: "center" }}></div>;
 }
 
 export default App;
