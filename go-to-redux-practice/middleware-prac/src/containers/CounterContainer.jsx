@@ -1,27 +1,26 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { decreaseAsync, increaseAsync } from "../redux/modules/counter";
+import { connect } from "react-redux";
 import Counter from "../components/Counter";
+import { increaseAsync, decreaseAsync } from "../redux/modules/counter";
 
-const CounterContainer = () => {
-  const number = useSelector((state) => state.counter);
-  const dispatch = useDispatch();
-
-  const onClickAddHandler = () => {
-    increaseAsync();
-  };
-
-  const onClickMinusHandler = () => {
-    decreaseAsync();
-  };
-
+const CounterContainer = ({ number, increaseAsync, decreaseAsync }) => {
   return (
-    <Counter
-      number={number}
-      onClickAddHandler={onClickAddHandler}
-      onClickMinusHandler={onClickMinusHandler}
-    />
+    <>
+      <Counter
+        number={number}
+        onIncrease={increaseAsync}
+        onDecrease={decreaseAsync}
+      />
+    </>
   );
 };
 
-export default CounterContainer;
+export default connect(
+  (state) => ({
+    number: state.counter,
+  }),
+  {
+    increaseAsync,
+    decreaseAsync,
+  },
+)(CounterContainer);
