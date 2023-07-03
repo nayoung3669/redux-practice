@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decrease, increase } from "../redux/modules/counter";
+import { decreaseAsync, increaseAsync } from "../redux/modules/counter";
 import Counter from "../components/Counter";
 
 const CounterContainer = () => {
@@ -8,11 +8,11 @@ const CounterContainer = () => {
   const dispatch = useDispatch();
 
   const onClickAddHandler = () => {
-    dispatch(increase());
+    increaseAsync();
   };
 
   const onClickMinusHandler = () => {
-    dispatch(decrease());
+    decreaseAsync();
   };
 
   return (
