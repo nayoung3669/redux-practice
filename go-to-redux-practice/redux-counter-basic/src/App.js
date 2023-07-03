@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function App() {
   const [num, setNum] = useState(0);
-  const globalNumber = useSelector((state) => state.counter.number);
+  const globalNumber = useSelector((state) => state.number);
   //store에 접근해 counter의 값을 읽어오기
   //useSelector hook 이용
 
