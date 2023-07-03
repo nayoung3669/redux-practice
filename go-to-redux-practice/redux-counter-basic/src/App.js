@@ -1,19 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { plusN, minusN } from "./redux/modules/counter";
+import { __minusNumber, __addNumber } from "./redux/modules/counterSlice";
 import { useState } from "react";
 
 function App() {
   const [num, setNum] = useState(0);
-  const globalNumber = useSelector((state) => state.number);
-  //store에 접근해 counter의 값을 읽어오기
-  //useSelector hook 이용
+  const globalNumber = useSelector((state) => state.counter.number);
 
   const dispatch = useDispatch();
 
+  const onClickAddNumberHandler = () => {
+    dispatch(__addNumber(+num));
+  };
+
+  const onClickMinusNumberHandler = () => {
+    dispatch(__minusNumber(+num));
+  };
+
   return (
     <div className="App">
-      <button onClick={() => dispatch(plusN(+num))}>+</button>
-      <button onClick={() => dispatch(minusN(+num))}>-</button>
+      <button onClick={onClickAddNumberHandler}>+</button>
+      <button onClick={onClickMinusNumberHandler}>-</button>
       <input
         type="number"
         value={num}
