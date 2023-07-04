@@ -1,4 +1,4 @@
-import { handleAction } from "redux-actions";
+import { handleActions } from "redux-actions";
 import * as api from "../../lib/api";
 
 //액션 타입 선언
@@ -14,7 +14,7 @@ const GET_USERS_FAILURE = "sample/GET_USERS_FAILURE";
 export const getPost = (id) => async (dispatch) => {
   dispatch({ type: GET_POST });
   try {
-    const response = await api.getPost(id);
+    const response = await api.getPostById(id);
     dispatch({ type: GET_POST_SUCCESS, payload: response.data });
   } catch (e) {
     dispatch({ type: GET_POST_FAILURE, payload: e, error: true });
@@ -22,7 +22,7 @@ export const getPost = (id) => async (dispatch) => {
   }
 };
 
-export const getUsers = async (dispatch) => {
+export const getUsers = () => async (dispatch) => {
   dispatch({ type: GET_USERS });
   try {
     const response = await api.getUsers();
@@ -43,7 +43,7 @@ const initialState = {
   users: null,
 };
 
-const sample = handleAction(
+const sample = handleActions(
   {
     [GET_POST]: (state) => ({
       ...state,
