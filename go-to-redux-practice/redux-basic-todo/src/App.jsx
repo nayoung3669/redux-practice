@@ -9,6 +9,7 @@ const App = () => {
     return state.todos;
   });
 
+  //side effect -> mount 될 때 처리
   useEffect(() => {
     dispatch(__getTodos());
   }, [dispatch]);

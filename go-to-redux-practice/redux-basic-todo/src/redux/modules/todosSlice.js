@@ -3,30 +3,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+//초깃값
 const initialState = {
   todos: [],
+  error: "",
   isLoading: false,
   isError: false,
-  error: null,
 };
 
+//thunk 함수 (비동기 함수 처리 -> createAsyncThunk)
 export const __getTodos = createAsyncThunk(
-  //thunk action creator 을 반환함
-  "getTodos", //첫번째 인자 문자열
-  //thunkAPI는 비동기함수
+  "getTodos",
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get("http://localhost:4000/todos");
-      console.log(response.data);
-      // toolkit에서 제공하는 API
-      return thunkAPI.fulfillWithValue(response.data); //Promise가 resolved 된 경우 dispatch 해주는 API
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (e) {
-      console.log(e);
-      return thunkAPI.rejectWithValue(e); //rejected 된 경우 dispatch 해주는 API
+      return thunkAPI.fulfillWithValue(e);
     }
   },
 );
 
+// 액션생성 함수 + 리듀서
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
@@ -36,14 +34,12 @@ export const todosSlice = createSlice({
       state.isLoading = true;
     },
     [__getTodos.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
       state.todos = action.payload;
+      state.isLoading = false;
     },
     [__getTodos.rejected]: (state, action) => {
-      state.isLoading = false;
       state.isError = true;
-      state.error = action.payload; //에러 객체 생성
+      state.error = action.payload;
     },
   },
 });
