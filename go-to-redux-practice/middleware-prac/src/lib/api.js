@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getPostById = (id) => {
+export const getPost = (id) => {
   return axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`);
 };
 
